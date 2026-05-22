@@ -13,23 +13,13 @@ export default function ThemeToggle() {
     setMounted(true);
     const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
     
-    // Check local storage or system preference
-    if (savedTheme) {
-      setTheme(savedTheme);
-      if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
+    // Check local storage or default to light mode
+    if (savedTheme === "dark") {
+      setTheme("dark");
+      document.documentElement.classList.add("dark");
     } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      if (prefersDark) {
-        setTheme("dark");
-        document.documentElement.classList.add("dark");
-      } else {
-        setTheme("light");
-        document.documentElement.classList.remove("dark");
-      }
+      setTheme("light");
+      document.documentElement.classList.remove("dark");
     }
   }, []);
 
